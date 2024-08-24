@@ -9,13 +9,16 @@ import {
   Sun,
   Moon,
   ShoppingBag,
+  Menu,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 export default function Component() {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [temperature, setTemperature] = useState("warm");
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     const root = window.document.documentElement;
@@ -35,7 +38,7 @@ export default function Component() {
       <header className="sticky top-0 backdrop-blur-md z-50 transition-colors duration-300">
         <nav className="container mx-auto px-4 py-4 flex justify-between items-center">
           <motion.h1
-            className={`text-2xl font-bold ${
+            className={`text-xl sm:text-2xl font-bold ${
               isDarkMode ? "text-pink-400" : "text-purple-600"
             }`}
             initial={{ opacity: 0, x: -20 }}
@@ -45,39 +48,41 @@ export default function Component() {
             ChromaBeautty
           </motion.h1>
           <motion.div
-            className="flex items-center space-x-4"
+            className="flex items-center space-x-2 sm:space-x-4"
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <Button
-              variant="ghost"
-              className={
-                isDarkMode
-                  ? "text-pink-400 hover:text-pink-300"
-                  : "text-purple-600 hover:text-purple-500"
-              }
-            >
-              <ShoppingBag className="mr-2 h-4 w-4" />
-              Comprar
-            </Button>
-            <Button
-              variant="outline"
-              className={`${
-                isDarkMode
-                  ? "bg-pink-500 hover:bg-pink-600 text-white"
-                  : "bg-purple-500 hover:bg-purple-600 text-white"
-              } border-none`}
-              onClick={() =>
-                window.open(
-                  "https://www.instagram.com/chromabeautty/",
-                  "_blank"
-                )
-              }
-            >
-              <Instagram className="mr-2 h-4 w-4" />
-              Instagram
-            </Button>
+            <div className="hidden sm:flex items-center space-x-4">
+              <Button
+                variant="ghost"
+                className={
+                  isDarkMode
+                    ? "text-pink-400 hover:text-pink-300"
+                    : "text-purple-600 hover:text-purple-500"
+                }
+              >
+                <ShoppingBag className="mr-2 h-4 w-4" />
+                Comprar
+              </Button>
+              <Button
+                variant="outline"
+                className={`${
+                  isDarkMode
+                    ? "bg-pink-500 hover:bg-pink-600 text-white"
+                    : "bg-purple-500 hover:bg-purple-600 text-white"
+                } border-none`}
+                onClick={() =>
+                  window.open(
+                    "https://www.instagram.com/chromabeautty/",
+                    "_blank"
+                  )
+                }
+              >
+                <Instagram className="mr-2 h-4 w-4" />
+                Instagram
+              </Button>
+            </div>
             <Switch
               checked={isDarkMode}
               onCheckedChange={toggleTheme}
@@ -88,14 +93,62 @@ export default function Component() {
             ) : (
               <Sun className="h-4 w-4 text-purple-600" />
             )}
+            <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
+              <SheetTrigger asChild>
+                <Button variant="ghost" size="icon" className="sm:hidden">
+                  <Menu className="h-5 w-5" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent
+                side="right"
+                className={
+                  isDarkMode
+                    ? "bg-gray-800 text-white"
+                    : "bg-white text-gray-900"
+                }
+              >
+                <div className="flex flex-col space-y-4 mt-8">
+                  <Button
+                    variant="ghost"
+                    className={
+                      isDarkMode
+                        ? "text-pink-400 hover:text-pink-300"
+                        : "text-purple-600 hover:text-purple-500"
+                    }
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    <ShoppingBag className="mr-2 h-4 w-4" />
+                    Comprar
+                  </Button>
+                  <Button
+                    variant="outline"
+                    className={`${
+                      isDarkMode
+                        ? "bg-pink-500 hover:bg-pink-600 text-white"
+                        : "bg-purple-500 hover:bg-purple-600 text-white"
+                    } border-none`}
+                    onClick={() => {
+                      window.open(
+                        "https://www.instagram.com/chromabeautty/",
+                        "_blank"
+                      );
+                      setIsMenuOpen(false);
+                    }}
+                  >
+                    <Instagram className="mr-2 h-4 w-4" />
+                    Instagram
+                  </Button>
+                </div>
+              </SheetContent>
+            </Sheet>
           </motion.div>
         </nav>
       </header>
 
-      <main className="container mx-auto px-4 py-12">
-        <section className="text-center mb-20">
+      <main className="container mx-auto px-4 py-8 sm:py-12">
+        <section className="text-center mb-12 sm:mb-20">
           <motion.h2
-            className={`text-5xl font-bold mb-4 ${
+            className={`text-3xl sm:text-5xl font-bold mb-4 ${
               isDarkMode ? "text-pink-400" : "text-purple-800"
             }`}
             initial={{ opacity: 0, y: 20 }}
@@ -105,7 +158,7 @@ export default function Component() {
             Transforme Seu Visual a Cada Toque
           </motion.h2>
           <motion.p
-            className={`text-xl mb-8 ${
+            className={`text-lg sm:text-xl mb-6 sm:mb-8 ${
               isDarkMode ? "text-gray-300" : "text-gray-600"
             }`}
             initial={{ opacity: 0, y: 20 }}
@@ -133,15 +186,15 @@ export default function Component() {
           </motion.div>
         </section>
 
-        <section className="mb-20">
+        <section className="mb-12 sm:mb-20">
           <h3
-            className={`text-3xl font-semibold text-center mb-10 ${
+            className={`text-2xl sm:text-3xl font-semibold text-center mb-8 sm:mb-10 ${
               isDarkMode ? "text-pink-400" : "text-purple-800"
             }`}
           >
             Experimente a Magia
           </h3>
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {["Esmalte", "Maquiagem", "Coloração Capilar"].map(
               (product, index) => (
                 <motion.div
@@ -152,11 +205,11 @@ export default function Component() {
                   initial={{ opacity: 0, y: 50 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.2 }}
-                  whileHover={{ scale: 1.05 }}
+                  whileHover={{ scale: 1.03 }}
                 >
-                  <div className="p-6">
+                  <div className="p-4 sm:p-6">
                     <h4
-                      className={`text-xl font-semibold mb-2 ${
+                      className={`text-lg sm:text-xl font-semibold mb-2 ${
                         isDarkMode ? "text-pink-400" : "text-purple-700"
                       }`}
                     >
@@ -170,7 +223,7 @@ export default function Component() {
                       Veja a mudança diante dos seus olhos!
                     </p>
                     <motion.div
-                      className={`h-40 rounded-md transition-colors duration-500 flex items-center justify-center`}
+                      className={`h-32 sm:h-40 rounded-md transition-colors duration-500 flex items-center justify-center`}
                       animate={{
                         background:
                           temperature === "warm"
@@ -189,7 +242,7 @@ export default function Component() {
                         repeatType: "reverse",
                       }}
                     >
-                      <Sparkles className="h-12 w-12 text-white" />
+                      <Sparkles className="h-10 sm:h-12 w-10 sm:w-12 text-white" />
                     </motion.div>
                     <Button
                       variant="outline"
@@ -211,15 +264,15 @@ export default function Component() {
           </div>
         </section>
 
-        <section className="text-center mb-20">
+        <section className="text-center mb-12 sm:mb-20">
           <h3
-            className={`text-3xl font-semibold mb-10 ${
+            className={`text-2xl sm:text-3xl font-semibold mb-8 sm:mb-10 ${
               isDarkMode ? "text-pink-400" : "text-purple-800"
             }`}
           >
             Por Que Escolher ChromaBeautty?
           </h3>
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {[
               {
                 title: "Inovador",
@@ -239,16 +292,16 @@ export default function Component() {
             ].map((feature, index) => (
               <motion.div
                 key={feature.title}
-                className={`rounded-lg shadow-lg p-6 ${
+                className={`rounded-lg shadow-lg p-4 sm:p-6 ${
                   isDarkMode ? "bg-gray-800" : "bg-white"
                 }`}
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.2 }}
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ scale: 1.03 }}
               >
                 <h4
-                  className={`text-xl font-semibold mb-2 ${
+                  className={`text-lg sm:text-xl font-semibold mb-2 ${
                     isDarkMode ? "text-pink-400" : "text-purple-700"
                   }`}
                 >
@@ -262,9 +315,9 @@ export default function Component() {
           </div>
         </section>
 
-        <section className="mb-20">
+        <section className="mb-12 sm:mb-20">
           <motion.div
-            className={`rounded-lg shadow-lg p-12 ${
+            className={`rounded-lg shadow-lg p-6 sm:p-12 ${
               isDarkMode ? "bg-gray-800" : "bg-white"
             }`}
             initial={{ opacity: 0, y: 50 }}
@@ -272,7 +325,7 @@ export default function Component() {
             transition={{ duration: 0.8 }}
           >
             <h3
-              className={`text-3xl font-semibold mb-6 text-center ${
+              className={`text-2xl sm:text-3xl font-semibold mb-4 sm:mb-6 text-center ${
                 isDarkMode ? "text-pink-400" : "text-purple-800"
               }`}
             >
@@ -308,17 +361,17 @@ export default function Component() {
 
         <section className="text-center">
           <motion.div
-            className={`rounded-lg p-12 ${
+            className={`rounded-lg p-6 sm:p-12 ${
               isDarkMode ? "bg-pink-500" : "bg-purple-500"
             } text-white`}
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8 }}
           >
-            <h3 className="text-3xl font-semibold mb-4">
+            <h3 className="text-2xl sm:text-3xl font-semibold mb-4">
               Pronta para se Transformar?
             </h3>
-            <p className="text-xl mb-8">
+            <p className="text-lg sm:text-xl mb-6 sm:mb-8">
               Junte-se à revolução ChromaBeautty e expresse sua personalidade em
               múltiplas cores!
             </p>
@@ -338,7 +391,7 @@ export default function Component() {
       </main>
 
       <footer
-        className={`py-6 mt-20 ${
+        className={`py-6 mt-12 sm:mt-20 ${
           isDarkMode ? "bg-gray-800 text-gray-300" : "bg-gray-100 text-gray-600"
         }`}
       >
