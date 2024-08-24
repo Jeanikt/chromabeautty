@@ -1,36 +1,60 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# ChromaBeautty
 
-## Getting Started
+ChromaBeautty é um site de apresentação beneficente para a marca fictícia de produtos de beleza que mudam de cor com a temperatura. Este projeto demonstra habilidades de design e desenvolvimento front-end utilizando tecnologias modernas.
 
-First, run the development server:
+## Sobre o Projeto
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Este projeto foi desenvolvido como parte de uma apresentação de portfólio, destacando a criatividade na criação de uma marca fictícia e o desenvolvimento de uma interface de usuário interativa e visualmente atraente. A ChromaBeautty não é uma marca real; é inteiramente fictícia e foi criada para fins educacionais e demonstrativos.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Funcionalidades
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Design Responsivo**: O site é totalmente responsivo, garantindo uma experiência de usuário suave em dispositivos móveis, tablets e desktops.
+- **Animações e Interatividade**: Utiliza `framer-motion` para animações suaves e interações dinâmicas.
+- **Componentes Modernos**: Faz uso de componentes reutilizáveis e estilizados com `Tailwind CSS` para um layout limpo e moderno.
+- **Integração com Redes Sociais**: Inclui um botão dedicado para acessar o perfil fictício da ChromaBeautty no Instagram.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Tecnologias Utilizadas
 
-## Learn More
+- **Next.js**: Framework React para construção da interface do usuário.
+- **React.js**: Biblioteca JavaScript para criação de interfaces de usuário.
+- **Framer Motion**: Biblioteca para animações em React.
+- **Tailwind CSS**: Framework de utilitários CSS para estilização rápida e eficiente.
+- **Lucide Icons**: Ícones modernos e customizáveis.
 
-To learn more about Next.js, take a look at the following resources:
+## Como Executar o Projeto
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Clone o repositório:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+    ```bash
+    git clone https://github.com/Jeanikt/chromabeautty.git
+    ```
 
-## Deploy on Vercel
+2. Navegue até o diretório do projeto:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+    ```bash
+    cd chromabeautty
+    ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+3. Instale as dependências:
+
+    ```bash
+    npm install
+    ```
+
+4. Execute o projeto:
+
+    ```bash
+    npm run dev
+    ```
+
+5. Abra seu navegador e acesse [http://localhost:3000](http://localhost:3000) para visualizar o site.
+
+## Contribuição
+
+Como este é um projeto fictício e voltado para fins demonstrativos, contribuições não são esperadas. No entanto, se você encontrar algum problema ou tiver sugestões, fique à vontade para abrir uma issue ou enviar um pull request.
+
+## Licença
+
+Este projeto é open-source e está licenciado sob a MIT License.
+
+**Nota**: Este projeto é puramente para fins educacionais e demonstrativos. A marca ChromaBeautty é fictícia e não tem nenhuma afiliação com qualquer produto ou marca real.

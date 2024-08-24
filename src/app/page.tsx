@@ -1,113 +1,351 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  ArrowRight,
+  Sparkles,
+  Instagram,
+  Sun,
+  Moon,
+  ShoppingBag,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Switch } from "@/components/ui/switch";
+
+export default function Component() {
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [temperature, setTemperature] = useState("warm");
+
+  useEffect(() => {
+    const root = window.document.documentElement;
+    root.classList.toggle("dark", isDarkMode);
+  }, [isDarkMode]);
+
+  const toggleTheme = () => setIsDarkMode(!isDarkMode);
+  const toggleTemperature = () =>
+    setTemperature((prev) => (prev === "warm" ? "cold" : "warm"));
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:size-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <div
+      className={`min-h-screen transition-colors duration-300 ${
+        isDarkMode ? "bg-gray-900 text-white" : "bg-gray-50 text-gray-900"
+      }`}
+    >
+      <header className="sticky top-0 backdrop-blur-md z-50 transition-colors duration-300">
+        <nav className="container mx-auto px-4 py-4 flex justify-between items-center">
+          <motion.h1
+            className={`text-2xl font-bold ${
+              isDarkMode ? "text-pink-400" : "text-purple-600"
+            }`}
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
           >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
+            ChromaBeautty
+          </motion.h1>
+          <motion.div
+            className="flex items-center space-x-4"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <Button
+              variant="ghost"
+              className={
+                isDarkMode
+                  ? "text-pink-400 hover:text-pink-300"
+                  : "text-purple-600 hover:text-purple-500"
+              }
+            >
+              <ShoppingBag className="mr-2 h-4 w-4" />
+              Comprar
+            </Button>
+            <Button
+              variant="outline"
+              className={`${
+                isDarkMode
+                  ? "bg-pink-500 hover:bg-pink-600 text-white"
+                  : "bg-purple-500 hover:bg-purple-600 text-white"
+              } border-none`}
+              onClick={() =>
+                window.open(
+                  "https://www.instagram.com/chromabeautty/",
+                  "_blank"
+                )
+              }
+            >
+              <Instagram className="mr-2 h-4 w-4" />
+              Instagram
+            </Button>
+            <Switch
+              checked={isDarkMode}
+              onCheckedChange={toggleTheme}
+              className={`${isDarkMode ? "bg-pink-600" : "bg-purple-600"}`}
             />
-          </a>
+            {isDarkMode ? (
+              <Moon className="h-4 w-4 text-pink-400" />
+            ) : (
+              <Sun className="h-4 w-4 text-purple-600" />
+            )}
+          </motion.div>
+        </nav>
+      </header>
+
+      <main className="container mx-auto px-4 py-12">
+        <section className="text-center mb-20">
+          <motion.h2
+            className={`text-5xl font-bold mb-4 ${
+              isDarkMode ? "text-pink-400" : "text-purple-800"
+            }`}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            Transforme Seu Visual a Cada Toque
+          </motion.h2>
+          <motion.p
+            className={`text-xl mb-8 ${
+              isDarkMode ? "text-gray-300" : "text-gray-600"
+            }`}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            Descubra produtos de beleza que mudam de cor com a temperatura. Seja
+            ousada, seja diferente, seja ChromaBeautty.
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
+            <Button
+              size="lg"
+              className={`${
+                isDarkMode
+                  ? "bg-pink-500 hover:bg-pink-600"
+                  : "bg-purple-500 hover:bg-purple-600"
+              } text-white`}
+            >
+              Explorar Produtos <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+          </motion.div>
+        </section>
+
+        <section className="mb-20">
+          <h3
+            className={`text-3xl font-semibold text-center mb-10 ${
+              isDarkMode ? "text-pink-400" : "text-purple-800"
+            }`}
+          >
+            Experimente a Magia
+          </h3>
+          <div className="grid md:grid-cols-3 gap-8">
+            {["Esmalte", "Maquiagem", "Coloração Capilar"].map(
+              (product, index) => (
+                <motion.div
+                  key={product}
+                  className={`rounded-lg shadow-lg overflow-hidden ${
+                    isDarkMode ? "bg-gray-800" : "bg-white"
+                  }`}
+                  initial={{ opacity: 0, y: 50 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.2 }}
+                  whileHover={{ scale: 1.05 }}
+                >
+                  <div className="p-6">
+                    <h4
+                      className={`text-xl font-semibold mb-2 ${
+                        isDarkMode ? "text-pink-400" : "text-purple-700"
+                      }`}
+                    >
+                      {product}
+                    </h4>
+                    <p
+                      className={`mb-4 ${
+                        isDarkMode ? "text-gray-300" : "text-gray-600"
+                      }`}
+                    >
+                      Veja a mudança diante dos seus olhos!
+                    </p>
+                    <motion.div
+                      className={`h-40 rounded-md transition-colors duration-500 flex items-center justify-center`}
+                      animate={{
+                        background:
+                          temperature === "warm"
+                            ? [
+                                "linear-gradient(45deg, #FF9A8B 0%, #FF6A88 55%, #FF99AC 100%)",
+                                "linear-gradient(45deg, #FFC796 0%, #FF9B82 55%, #FFB8A1 100%)",
+                              ]
+                            : [
+                                "linear-gradient(45deg, #A0F1EA 0%, #7FD6E2 55%, #9EEAF9 100%)",
+                                "linear-gradient(45deg, #84FAB0 0%, #8FD3F4 55%, #9EEAF9 100%)",
+                              ],
+                      }}
+                      transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                        repeatType: "reverse",
+                      }}
+                    >
+                      <Sparkles className="h-12 w-12 text-white" />
+                    </motion.div>
+                    <Button
+                      variant="outline"
+                      className={`mt-4 w-full ${
+                        isDarkMode
+                          ? "text-pink-400 border-pink-500 hover:bg-pink-900"
+                          : "text-purple-700 border-purple-500 hover:bg-purple-100"
+                      }`}
+                      onClick={toggleTemperature}
+                    >
+                      {temperature === "warm"
+                        ? "Aplicar Frio"
+                        : "Aplicar Calor"}
+                    </Button>
+                  </div>
+                </motion.div>
+              )
+            )}
+          </div>
+        </section>
+
+        <section className="text-center mb-20">
+          <h3
+            className={`text-3xl font-semibold mb-10 ${
+              isDarkMode ? "text-pink-400" : "text-purple-800"
+            }`}
+          >
+            Por Que Escolher ChromaBeautty?
+          </h3>
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                title: "Inovador",
+                description:
+                  "Tecnologia que muda de cor em reação à temperatura",
+              },
+              {
+                title: "Expressivo",
+                description:
+                  "Múltiplos visuais em um único produto para criatividade máxima",
+              },
+              {
+                title: "Alta Qualidade",
+                description:
+                  "Fórmulas premium para resultados duradouros e vibrantes",
+              },
+            ].map((feature, index) => (
+              <motion.div
+                key={feature.title}
+                className={`rounded-lg shadow-lg p-6 ${
+                  isDarkMode ? "bg-gray-800" : "bg-white"
+                }`}
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.2 }}
+                whileHover={{ scale: 1.05 }}
+              >
+                <h4
+                  className={`text-xl font-semibold mb-2 ${
+                    isDarkMode ? "text-pink-400" : "text-purple-700"
+                  }`}
+                >
+                  {feature.title}
+                </h4>
+                <p className={isDarkMode ? "text-gray-300" : "text-gray-600"}>
+                  {feature.description}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </section>
+
+        <section className="mb-20">
+          <motion.div
+            className={`rounded-lg shadow-lg p-12 ${
+              isDarkMode ? "bg-gray-800" : "bg-white"
+            }`}
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <h3
+              className={`text-3xl font-semibold mb-6 text-center ${
+                isDarkMode ? "text-pink-400" : "text-purple-800"
+              }`}
+            >
+              Sobre a ChromaBeautty
+            </h3>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1, delay: 0.5 }}
+            >
+              {[
+                "A ChromaBeautty é uma revolução no mundo da beleza com nossos produtos inovadores que mudam de cor dependendo da temperatura.",
+                "Imagine ter unhas que revelam novos tons quando tocadas pelo frio ou calor, maquiagem que se adapta ao ambiente e até cabelos que se transformam com qualquer fonte de calor, como um secador ou uma mudança na temperatura.",
+                "Nossos produtos inovadores incluem tintas, esmaltes e maquiagens para que você possa se reinventar da maneira que quiser!",
+                "Na ChromaBeautty, você expressa sua personalidade em múltiplas cores, de uma forma única e surpreendente!",
+                "Seja ousada, seja diferente, seja ChromaBeautty. 🌈",
+              ].map((paragraph, index) => (
+                <motion.p
+                  key={index}
+                  className={`mb-4 ${
+                    isDarkMode ? "text-gray-300" : "text-gray-600"
+                  }`}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.2 }}
+                >
+                  {paragraph}
+                </motion.p>
+              ))}
+            </motion.div>
+          </motion.div>
+        </section>
+
+        <section className="text-center">
+          <motion.div
+            className={`rounded-lg p-12 ${
+              isDarkMode ? "bg-pink-500" : "bg-purple-500"
+            } text-white`}
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8 }}
+          >
+            <h3 className="text-3xl font-semibold mb-4">
+              Pronta para se Transformar?
+            </h3>
+            <p className="text-xl mb-8">
+              Junte-se à revolução ChromaBeautty e expresse sua personalidade em
+              múltiplas cores!
+            </p>
+            <Button
+              size="lg"
+              variant="secondary"
+              className={`${
+                isDarkMode
+                  ? "bg-white text-pink-500 hover:bg-gray-100"
+                  : "bg-white text-purple-500 hover:bg-gray-100"
+              }`}
+            >
+              Comprar Agora <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+          </motion.div>
+        </section>
+      </main>
+
+      <footer
+        className={`py-6 mt-20 ${
+          isDarkMode ? "bg-gray-800 text-gray-300" : "bg-gray-100 text-gray-600"
+        }`}
+      >
+        <div className="container mx-auto px-4 text-center">
+          <p>&copy; 2024 ChromaBeautty. Todos os direitos reservados.</p>
         </div>
-      </div>
-
-      <div className="relative z-[-1] flex place-items-center before:absolute before:h-[300px] before:w-full before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-balance text-sm opacity-50">
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+      </footer>
+    </div>
   );
 }
